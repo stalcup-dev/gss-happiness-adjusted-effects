@@ -84,7 +84,7 @@
 - `reports/DECISION_MEMO.md` — Data quality summary
 
 **Modified:**
-- `DOWNLOAD_GSS.md` — Phase 1-2 instructions, 10-predictor requirement, WTSSPS emphasis
+- `docs/DOWNLOAD_GSS.md` — Phase 1-2 instructions, 10-predictor requirement, WTSSPS emphasis
 - `README.md` — Phase 1-2 deliverables, quick-start, links to decision memo
 
 **Outputs generated:**

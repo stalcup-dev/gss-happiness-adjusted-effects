@@ -13,6 +13,8 @@ This repo analyzes happiness data from the General Social Survey (GSS), a long-r
 
 **Bootstrap stability intervals:** Computed via nonparametric respondent-level bootstrap (B=500) with WTSSPS applied when averaging predicted probabilities. Intervals reflect stability under resampling with the fitted model; they do not incorporate survey strata/PSU design or model-refit uncertainty.
 
+Because the model is held fixed during resampling and $N$ is large, these stability intervals are expected to be very tight.
+
 ## So what?
 
 **Question**
@@ -29,6 +31,10 @@ What factors are most strongly associated with being “Very happy” in recent 
 
 - Predictive lift is minimal (core model does not beat a YEAR-only baseline on log loss), so treat results as interpretive—not a strong classifier.
 - If you’re prioritizing subgroup comparisons to emphasize, health-related differences are larger than income/marital in this period.
+
+**Decision-use (what I’d do with this)**
+
+If I were a PM/analyst choosing what to prioritize in a happiness “drivers” narrative, I’d lead with health as the highest-signal segmentation cut, use income and marital as secondary context, and avoid productizing this as a predictor (it’s not a strong classifier).
 
 **Why you can trust it (within limits)**
 
@@ -119,7 +125,7 @@ What factors are most strongly associated with being “Very happy” in recent 
 
 ### 1. Get the data
 
-See [DOWNLOAD_GSS.md](DOWNLOAD_GSS.md) for manual or programmatic download.
+See [docs/DOWNLOAD_GSS.md](docs/DOWNLOAD_GSS.md) for manual or programmatic download.
 
 Expected filename: `data/raw/gss_extract.csv`
 

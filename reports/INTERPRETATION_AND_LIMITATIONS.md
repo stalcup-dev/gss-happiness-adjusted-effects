@@ -135,6 +135,43 @@ If population-level inference critical, post-hoc weighting adjustments (marginal
 - For confirmatory analysis: refit in SAS PROC SURVEYLOGISTIC or R survey::svyglm() with design specification
 - For exploratory: current unweighted results acceptable as sensitivity check
 
+### Appendix (Optional): Survey-weighted refit in R
+
+If a reviewer asks “how close is this to survey-weighted inference?”, the cleanest next step is to refit a simpler outcome in R using the `survey` package.
+
+- **Recommended target (keeps scope realistic):** binary outcome `VERY_HAPPY` (1 if HAPPY == "VERY HAPPY", else 0) with the same core predictors.
+- **Why binary:** `survey` supports design-based GLMs directly; design-based multinomial/ordinal models are possible but are more specialized and less transparent.
+
+Sketch (requires `WTSSPS`; if your extract includes PSU/strata variables, add them to the design):
+
+```r
+library(readr)
+library(dplyr)
+library(survey)
+
+df <- read_csv("data/raw/gss_extract.csv")
+
+df <- df %>%
+  mutate(
+    VERY_HAPPY = as.integer(HAPPY == "VERY HAPPY")
+  )
+
+# If you have design variables (often named something like VPSU/VSTRAT), prefer:
+# des <- svydesign(ids = ~VPSU, strata = ~VSTRAT, weights = ~WTSSPS, data = df, nest = TRUE)
+# Otherwise, weights-only approximation:
+des <- svydesign(ids = ~1, weights = ~WTSSPS, data = df)
+
+fit <- svyglm(
+  VERY_HAPPY ~ factor(YEAR) + scale(AGE) + SEX + scale(EDUC) + INCOME + MARITAL + HEALTH + WRKSTAT + PARTYID + RACE,
+  design = des,
+  family = quasibinomial()
+)
+
+summary(fit)
+```
+
+This gives a design-aware sensitivity check for direction/magnitude on the “Very happy” contrast, which is typically the decision-relevant KPI used throughout the repo.
+
 ---
 
 ## Recommendations for Principal Analyst
