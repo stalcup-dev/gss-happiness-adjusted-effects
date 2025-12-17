@@ -15,11 +15,27 @@ This repo analyzes happiness data from the General Social Survey (GSS), a long-r
 
 ## So what?
 
+**Question**
+
 What factors are most strongly associated with being “Very happy” in recent U.S. survey data (GSS, 2010–2022)?
-Health shows the largest adjusted difference in P(VERY HAPPY) (Excellent vs Poor **+4.6 pp**), while income (Q4 vs Q1 **+2.6 pp**) and marital status (Married vs Divorced **+2.9 pp**) are smaller.
-Predictive lift is minimal (core model does not beat a YEAR-only baseline on log loss), so treat results as interpretive—not a strong classifier.
-If you’re prioritizing which subgroup comparisons to emphasize, health-related differences are larger than income/marital in this period.
-Trust signals: WTSSPS-weighted descriptives and standardized predictions, preprocessing validation + unit tests, cross-validated metrics, and documented sensitivity notes (including the 2021–2022 mode change).
+
+**What to take away**
+
+- Health shows the largest adjusted difference in P(VERY HAPPY) (Excellent vs Poor **+4.6 pp**).
+- Income position (within-year quartiles) is smaller but meaningful (Q4 vs Q1 **+2.6 pp**).
+- Marital status is similar in magnitude to income (Married vs Divorced **+2.9 pp**).
+
+**How to use this**
+
+- Predictive lift is minimal (core model does not beat a YEAR-only baseline on log loss), so treat results as interpretive—not a strong classifier.
+- If you’re prioritizing subgroup comparisons to emphasize, health-related differences are larger than income/marital in this period.
+
+**Why you can trust it (within limits)**
+
+- WTSSPS-weighted descriptives and standardized predictions
+- Preprocessing validation + unit tests
+- Cross-validated metrics
+- Documented sensitivity notes (including the 2021–2022 mode change)
 
 ## Visual highlights (with interpretation)
 
