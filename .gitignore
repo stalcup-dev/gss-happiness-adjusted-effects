@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyd
+*.so
+.Python
+.venv/
+venv/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data outputs
+/data/raw/
+/data/processed/
+/reports/figures/
+/reports/tables/
+
+# OS / Editor
+.DS_Store
+.vscode/

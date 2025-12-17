@@ -1,0 +1,26 @@
+{
+  "description": "Variable-specific GSS non-substantive codes that map to NA",
+  "string_patterns": {
+    "_all": ["IAP", "DK", "NA", "REFUSED"]
+  },
+  "numeric_codes": {
+    "EDUC": [98, 99],
+    "AGE": [98, 99],
+    "INCOME": [0, 98, 99],
+    "HEALTH": [],
+    "YEAR": [],
+    "HAPPY": [],
+    "WTSSPS": []
+  },
+  "notes": {
+    "string_patterns._all": "Applied to all object/string columns unless overridden per-column",
+    "numeric_codes": "Only recode listed columns. Codes not in list are preserved as valid values.",
+    "EDUC": "98=Missing, 99=No answer",
+    "AGE": "98=Refused, 99=No answer",
+    "INCOME": "0=Refused, 98=DK, 99=No answer",
+    "HEALTH": "No numeric NA codes (categories are exclusive)",
+    "YEAR": "Must be integer; non-integer is validation error",
+    "HAPPY": "Must be valid category; no numeric recoding",
+    "WTSSPS": "Must be numeric >0; treated as missing if 0 or NA"
+  }
+}
