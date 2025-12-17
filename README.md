@@ -21,6 +21,80 @@ Predictive lift is minimal (core model does not beat a YEAR-only baseline on log
 If you’re prioritizing which subgroup comparisons to emphasize, health-related differences are larger than income/marital in this period.
 Trust signals: WTSSPS-weighted descriptives and standardized predictions, preprocessing validation + unit tests, cross-validated metrics, and documented sensitivity notes (including the 2021–2022 mode change).
 
+## Visual highlights (with interpretation)
+
+### Adjusted differences (model-standardized)
+
+![Adjusted happiness by health](reports/figures/adjusted_effects_health.png)
+
+- Read as: model-standardized P(VERY HAPPY) by health level, holding other covariates at their observed distribution.
+- Takeaway: the adjusted spread across health is larger than the spreads shown for income quartile or marital status.
+- Guardrail: associations only; model fit is unweighted and intervals are bootstrap stability intervals (not survey-design-based population intervals).
+
+![Adjusted happiness by income quartile](reports/figures/adjusted_effects_income_quartile.png)
+
+- Read as: adjusted P(VERY HAPPY) by within-year income position (Q1–Q4).
+- Takeaway: Q4 is higher than Q1 in adjusted probability, but the overall magnitude is modest (single-digit pp).
+
+![Adjusted happiness by marital status](reports/figures/adjusted_effects_marital.png)
+
+- Read as: adjusted P(VERY HAPPY) by marital category after standardization.
+- Takeaway: Married is higher than Divorced in adjusted probability; treat other pairwise comparisons as descriptive.
+
+### Descriptive patterns (weighted)
+
+![Weighted happiness trend](reports/figures/weighted_happy_trend.png)
+
+- Read as: WTSSPS-weighted trend in happiness response shares over time.
+- Takeaway: year-to-year movement is present but not dramatic; interpret 2021–2022 with caution due to survey mode change.
+
+![Missingness heatmap](reports/figures/missingness_heatmap.png)
+
+- Read as: missing data patterns by year for core fields used in the pipeline.
+- Takeaway: missingness is structured (not uniform across variables/years), motivating the project’s explicit recoding + validation guardrails.
+
+![Weighted crosstab: health × happiness](reports/figures/crosstab_health_x_happy.png)
+
+- Read as: weighted group differences without covariate adjustment.
+- Takeaway: raw gaps are directionally consistent with the adjusted results, but can reflect confounding.
+
+![Weighted crosstab: income quartile × happiness](reports/figures/crosstab_income_quartile_x_happy.png)
+
+- Read as: weighted crosstab by within-year income position.
+- Takeaway: differences are modest; use adjusted plots for “net of other covariates” comparisons.
+
+![Weighted crosstab: income (raw) × happiness](reports/figures/crosstab_income_x_happy.png)
+
+- Read as: weighted crosstab by the raw income measure (less comparable across years than within-year quartiles).
+- Takeaway: use this as a descriptive check; prefer within-year income quartiles for comparisons across the full 2010–2022 window.
+
+![Weighted crosstab: marital × happiness](reports/figures/crosstab_marital_x_happy.png)
+
+- Read as: weighted crosstab by marital category.
+- Takeaway: Married vs Divorced differences appear in both descriptive and adjusted views.
+
+### Predicted probability views (interpretive)
+
+![Predicted probabilities by health](reports/figures/predicted_probs_health.png)
+
+- Read as: model-based predicted probabilities across outcomes by health category.
+- Takeaway: covariates shift predicted probabilities, but overall predictive lift is minimal—use for interpretation, not classification.
+
+![Predicted probabilities by income](reports/figures/predicted_probs_income.png)
+
+- Read as: predicted probabilities by within-year income quartile.
+- Takeaway: differences concentrate at the top quartile relative to lower quartiles.
+
+![Predicted probabilities by marital status](reports/figures/predicted_probs_marital.png)
+
+- Read as: predicted probabilities by marital category.
+- Takeaway: differences are present but modest; residual confounding is plausible.
+
+![Predicted probabilities by year](reports/figures/predicted_probs_year.png)
+
+- Read as: predicted probabilities by survey year (with other covariates as modeled).
+- Takeaway: time effects exist, but this model is not a strong predictor; use as contextual trend signal.
+
 **Phase 1** focuses on data inspection and reporting.  
 **Phase 2** adds weighted trends and crosstabs with survey-aware guardrails.  
 **Phase 3** implements multinomial logit models with interpretations.
